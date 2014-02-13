@@ -7,17 +7,18 @@
     </colgroup>
     <thead>
       <tr>
-        <th>Victims:</th>
-        <th>Killers:</th>
+        <th><span ng-click="predicate = 'name'; reverse = !reverse">Player:</span></th>
+        <th><span ng-click="predicate = 'faction'; reverse = !reverse">Faction:</span></th>
+        <th><span ng-click="predicate = 'kills'; reverse = !reverse">Kills:</span></th>
+        <th><span ng-click="predicate = 'deaths'; reverse = !reverse">Deaths:</span></th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="player in players">
-        <td>{{player["name"]}}</td>
-        <td>{{player["faction"]}}</td>
-        <td>{{player["kills"]}}</td>
-        <td>{{player["deaths"]}}</td>
-        
+      <tr ng-repeat="player in playersArray | orderBy:predicate:reverse">
+        <td>{{player.name}}</td>
+        <td>{{player.faction}}</td>
+        <td>{{player.kills}}</td>
+        <td>{{player.deaths}}</td>
       </tr>
     </tbody>
   </table>

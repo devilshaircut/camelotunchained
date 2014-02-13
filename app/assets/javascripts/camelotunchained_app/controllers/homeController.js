@@ -32,7 +32,18 @@ CamelotUnchained.controller("homeController", ["$scope", "httpService", "$route"
         }
       }
     }
-    console.log($scope.players);
+    $scope.playersArray = []
+    for ( var player in $scope.players ) {
+      if ( $scope.players.hasOwnProperty(player) ) {
+        var playerData = {
+          "name": $scope.players[player]["name"],
+          "faction": $scope.players[player]["faction"],
+          "kills": $scope.players[player]["kills"],
+          "deaths": $scope.players[player]["deaths"]
+        }
+        $scope.playersArray.push(playerData);
+      }
+    }
   };
 
   // This is the callback function that executes if the HTTP requests returns unsuccessfully.
