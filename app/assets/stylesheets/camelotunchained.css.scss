@@ -1,0 +1,470 @@
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/utilities/general/clearfix";
+@import "compass/utilities/general/hacks";
+@import "susy";
+
+
+
+/****************************************************************************************************
+
+  Table of Contents
+
+*****************************************************************************************************
+
+  0.  SCSS Variables
+      - Color Theme
+      - Media Size Breakpoints
+      - Susy Grid Settings
+      - Layout Sizing
+      - Font Stacks
+      - Z Indices
+
+  1.  Universal Cascade
+      - Body
+
+  2.  Tag-Specific Styles
+      - Forms
+      - Tables
+
+  3.  Utility Classes
+      - Paragraph Variations
+      - Buttons
+
+  4.  Template Sections
+
+  5.  Content Elements
+
+  6.  Pages
+
+  7.  JS Widgets
+
+****************************************************************************************************/
+
+
+
+/****************************************************************************************************
+  0.  SCSS Variables
+****************************************************************************************************/
+
+
+/* Color Theme */
+/************************************************/
+
+$line-color: #e4e7e0;
+$line-color-lod: #414141;
+
+$font-header-color: #2d3330;
+$font-body-color: #2d3330;
+$font-light-color: #bcbdbe;
+
+$white: #ffffff;
+$dark-blue: #5bc0d5;
+$light-blue: #98dde9;
+$dark-yellow: #d5d35b;
+$light-yellow: #e9e898;
+$black: #000102;
+
+$charcoal: #2d3330;
+$grey-3: #b7b8b7;
+$grey-2: #e4e7e0;
+$grey-1: #f3f5f0;
+
+$page-background-color: #ffffff;
+
+
+/* Media Size Breakpoints */
+/************************************************/
+
+$cinema-breakpoint: 1900px;
+$monitor-breakpoint: 1200px;
+$laptop-breakpoint: 980px;
+$tablet-breakpoint: 768px;
+$phone-breakpoint: 480px;
+
+@mixin screen-format($media-type) {
+  @if $media-type == cinema {
+    @media (min-width: $cinema-breakpoint) { @content; }
+  }
+  @if $media-type == monitor {
+    @media (min-width: $monitor-breakpoint) and (max-width: $cinema-breakpoint - 1) { @content; }
+  }
+  @else if $media-type == laptop {
+    @media (min-width: $laptop-breakpoint) and (max-width: $monitor-breakpoint - 1) { @content; }
+  }
+  @else if $media-type == tablet {
+    @media (min-width: $tablet-breakpoint) and (max-width: $laptop-breakpoint - 1) { @content; }
+  }
+  @else if $media-type == phone {
+    @media (min-width: $phone-breakpoint) and (max-width: $tablet-breakpoint - 1) { @content; }
+  }
+  @else if $media-type == nano {
+    @media (max-width: $phone-breakpoint - 1) { @content; }
+  }
+}
+
+
+/* Susy Grid Settings */
+/************************************************/
+
+$total-columns: 12;
+$column-width: 56px;
+$gutter-width: 48px;
+$grid-padding: 0;
+
+
+/* Font Stacks */
+/************************************************/
+
+$header-font: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
+$body-font: 'Source Sans Pro', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+$accent-font: 'Montserrat', 'Source Sans Pro', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+$logo-font: 'Cinzel', 'Georgia', 'Times New Roman', serif;
+
+$symbolset-standard: "SSStandard";
+$symbolset-symbolicons: "SSSymbolicons";
+$symbolset-social: "SSSocial";
+
+
+/* Z Indices */
+/************************************************/
+
+
+
+/****************************************************************************************************
+  1.  Universal Cascade
+****************************************************************************************************/
+
+
+/* HTML */
+/************************************************/
+
+html {
+  // height: 100%;
+  // overflow: hidden;
+}
+
+
+/* Body */
+/************************************************/
+
+body {
+  width: 100%;
+  // height: 100%;
+  font-family: $body-font;
+  font-size: 14px;
+  line-height: 25px;
+  font-weight: 400;
+  color: $font-body-color;
+  -webkit-font-smoothing: antialiased;
+  // overflow: hidden;
+  background: $page-background-color;
+}
+
+h1, h2, h3, h4, h5, h6 {}
+
+h1 {
+  margin: 0 0 21px 0;
+  font-family: $header-font;
+  font-size: 72px;
+  line-height: 70px;
+  text-transform: uppercase;
+  @include screen-format(laptop) {}
+  @include screen-format(tablet) {}
+  @include screen-format(phone) {}
+  @include screen-format(nano) {}
+}
+h2 {}
+h3 {
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 700;
+}
+h4 {
+  margin: 0 0 17px 0;
+  font-family: $accent-font;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+h5 {}
+h6 {}
+
+
+
+
+h3.md-lined-header {
+  margin: 0 0 20px 0;
+  font-family: $accent-font;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-bottom: 1px solid $line-color;
+}
+
+
+hr {
+  width: 100%;
+  height: 1px;
+  margin: 15px 0 24px 0;
+  padding: 0;
+  border: none;
+  color: $line-color;
+  background: $line-color;
+}
+
+strong { font-weight: 700; }
+em { font-style: italic; }
+
+p {
+  margin: 0 0 20px 0;
+}
+p.md-paragraph-short {}
+
+ul.md-unlinked-list {
+  width: 100%;
+  margin: 0 0 20px 0;
+  padding: 0 0 0 30px;
+  list-style-type: disc;
+  @include box-sizing(border-box);
+  li {
+    width: 100%;
+    
+    @include box-sizing(border-box);
+  }
+}
+
+label.md-form-label-basic,
+span.md-form-label-basic {
+  display: inline-block;
+  padding: 6px 0 8px 0;
+  font-weight: 700;
+}
+label:hover {
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  display: inline-block;
+  margin: 0;
+  font-family: $body-font;
+  font-size: 14px;
+  line-height: 25px;
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+  @include opacity(0.33);
+}
+
+ .md-input-disabled {
+  > *  {
+    @include opacity(0.33);
+  }
+ }
+
+select {
+  height: 40px;
+  border: 1px solid $line-color;
+}
+
+textarea {
+  min-height: 100px;
+  resize: none;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"],
+textarea {
+  padding: 5px 9px 7px 9px;
+  border: 1px solid $line-color;
+  color: $font-body-color;
+  @include box-sizing(border-box);
+  @include border-radius(2px);
+}
+
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="file"]:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border: 1px solid $light-blue;
+}
+
+a {
+  color: $light-blue;
+  cursor: pointer;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+
+/* Buttons */
+/************************************************/
+
+.md-submit {
+  display: inline-block;
+  float: right;
+  width: 100%;
+}
+
+.md-button,
+input[type="submit"],
+button {
+  display: inline-block;
+  padding: 4px 20px 6px 20px;
+  margin: 0;
+  border: none;
+  color: $white;
+  background: $font-header-color;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: $body-font;
+  line-height: 30px;
+  cursor: pointer;
+  position: relative;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  -webkit-appearance: none;
+  @include box-sizing(border-box);
+  @include border-radius(2px);
+  @include transition(opacity 0.1s linear);
+}
+
+.md-button:active,
+input[type="submit"]:active,
+button:active {
+  position: relative;
+  top: 2px;
+}
+
+.md-button:hover,
+input[type="submit"]:hover,
+button:hover {
+  text-decoration: none;
+  @include opacity(.66);
+}
+
+.md-button:focus,
+input[type="submit"]:focus,
+button:focus {
+  outline: none;
+}
+
+.md-button:before,
+input[type="submit"]:before,
+button:before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
+}
+
+
+
+input[type="submit"].md-button-minor,
+button.md-button-minor,
+.md-button-minor {
+  padding: 2px 15px 2px 15px;
+  font-family: $header-font;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 20px;
+  text-transform: uppercase;
+}
+
+
+input[type="submit"].md-button-cta,
+button.md-button-cta,
+.md-button-cta {
+  padding: 10px 15px 10px 15px;
+  background: $dark-blue;
+  font-family: $accent-font;
+  font-size: 14px;
+  line-height: 20px;
+  text-transform: uppercase;
+}
+
+
+
+
+
+table {
+  width: 100%;
+  > thead {
+    > tr {
+      > th {
+        padding: 0 10px;
+        font-weight: 700;
+        background: rgba(0, 0, 0, .1);
+      }
+      > th.md-sortable-column {
+        cursor: pointer;
+        white-space: nowrap;
+        i.ss-icon {
+          font-size: 8px;
+        }
+      }
+      > th.md-sortable-column-current {
+        background: rgba(0, 0, 0, 0.15);
+      }
+    } 
+  }
+  > tbody {
+    > tr {
+      > td {
+        padding: 0 10px;
+        span.md-table-convertible-label {
+          display: none;
+          visibility: hidden;
+        }
+      }
+    }
+    > tr:nth-child(even) {
+      > td {
+        background: rgba(0, 0, 0, .03);
+      }
+    }
+  }
+}
+
+
+
+.md-container {
+  display: block;
+  padding: 0 20px;
+  margin: 0 auto;
+  max-width: $monitor-breakpoint;
+  @include legacy-pie-clearfix;
+  @include screen-format(monitor) {
+    width: $monitor-breakpoint - 40px; // The subtraction of 40px accounts for the container padding.
+  }
+  @include screen-format(phone) {
+    padding: 0;
+  }
+  @include screen-format(nano) {
+    padding: 0;
+  }
+}
+
