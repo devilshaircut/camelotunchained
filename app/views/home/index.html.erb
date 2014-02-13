@@ -1,9 +1,26 @@
 
 <div ng-controller="homeController">
 
-Home.<br />
-
-{{sample[0]["_id"]}}
+  <table>
+    <colgroup>
+      <col />
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Victims:</th>
+        <th>Killers:</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="player in players">
+        <td>{{player["name"]}}</td>
+        <td>{{player["faction"]}}</td>
+        <td>{{player["kills"]}}</td>
+        <td>{{player["deaths"]}}</td>
+        
+      </tr>
+    </tbody>
+  </table>
 
 </div>
 
